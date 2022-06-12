@@ -2,11 +2,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Coin from "./Coin";
 import Coins from "./Coins";
 
-interface IrouterProps {
-  toggleDark: () => void;
-}
+interface IrouterProps {}
 
-function Router({ toggleDark }: IrouterProps) {
+function Router() {
   return (
     <BrowserRouter>
       <Switch>
@@ -14,7 +12,7 @@ function Router({ toggleDark }: IrouterProps) {
           <Coin />
         </Route>
         <Route path='/'>
-          <Coins toggleDark={toggleDark} />
+          <Coins />
         </Route>
       </Switch>
     </BrowserRouter>
