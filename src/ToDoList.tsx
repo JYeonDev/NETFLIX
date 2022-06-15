@@ -1,8 +1,27 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+interface IForm {
+  Email: string;
+  a: string;
+  b: string;
+  c: string;
+  d: string;
+  e: string;
+  f: string;
+}
+
 function ToDoList() {
-  const { register, watch, handleSubmit } = useForm();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({
+    defaultValues: {
+      Email: "@naver.com",
+    },
+  });
   const onValid = (data: any) => {
     console.log(data);
   };
@@ -10,15 +29,19 @@ function ToDoList() {
     <div>
       <form onSubmit={handleSubmit(onValid)}>
         <input
-          {...register("Email", { required: true, minLength: 10 })}
+          {...register("Email", {
+            required: "Email is required",
+            pattern: /^[A-Za-z0-9._%+-]+@naver.com$/,
+          })}
           placeholder='Email'
         />
-        <input {...(register("1"), { required: true })} placeholder='Email' />
-        <input {...(register("2"), { required: true })} placeholder='Email' />
-        <input {...(register("3"), { required: true })} placeholder='Email' />
-        <input {...(register("4"), { required: true })} placeholder='Email' />
-        <input {...(register("5"), { required: true })} placeholder='Email' />
-        <input {...(register("6"), { required: true })} placeholder='Email' />
+        <span>{errors?.Email?.message}</span>
+        <input {...(register("a"), { required: true })} placeholder='Email' />
+        <input {...(register("b"), { required: true })} placeholder='Email' />
+        <input {...(register("c"), { required: true })} placeholder='Email' />
+        <input {...(register("d"), { required: true })} placeholder='Email' />
+        <input {...(register("e"), { required: true })} placeholder='Email' />
+        <input {...(register("f"), { required: true })} placeholder='Email' />
         <button>Add</button>
       </form>
     </div>
