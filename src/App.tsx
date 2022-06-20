@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { useRecoilState } from "recoil";
 import { toDoState } from "./atoms";
+import DragabbleCard from "./Components/DragabbleCard";
 
 const Wrraper = styled.div`
   display: flex;
@@ -59,17 +60,7 @@ function App() {
               {(magic) => (
                 <Board ref={magic.innerRef} {...magic.droppableProps}>
                   {toDos.map((toDo, index) => (
-                    <Draggable key={toDo} draggableId={toDo} index={index}>
-                      {(magic) => (
-                        <Card
-                          ref={magic.innerRef}
-                          {...magic.draggableProps}
-                          {...magic.dragHandleProps}
-                        >
-                          {toDo}
-                        </Card>
-                      )}
-                    </Draggable>
+                    <DragabbleCard key={toDo} index={index} toDo={toDo} />
                   ))}
                   {magic.placeholder}
                 </Board>
